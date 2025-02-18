@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Metric Distribution</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,7 +40,27 @@
     <select id="gender">
     </select>
 
+    <!-- HR Zone Info Button -->
+    <button id="hrZoneInfoBtn">HR Zone Info</button>
+    
+
+    <!-- Popup Box -->
+    <div id="hrZonePopup" class="popup-box">
+        <button id="closePopupBtn" style="float: right;">X</button>
+        <h3>Heart Rate Zones</h3>
+        <p><strong>Fat Burn Zone:</strong> 50% - 70% of your max Heart Rate. Ideal for weight loss and endurance.</p>
+        <p><strong>Cardio Zone:</strong> 70% - 85% of your max Heart Rate. Improves cardiovascular fitness.</p>
+        <p><strong>Peak Zone:</strong> 85% - 100% of your max Heart Rate. Best for high-intensity training.</p>
+        <h4>How is Max Heart Rate Calculated?</h4>
+        <p>The maximum heart rate (Max HR) is estimated using the formula:</p>
+        <p><strong>Max HR = 220 - Age</strong></p>
+    </div>
+
+
     <svg id="chart" width="600" height="400"></svg>
+    <div id="tooltip" style="opacity: 0; position: absolute;"></div>
+
+    <select id="metric" style="display: none;"></select>
 
     <!-- Display Calculated Stats (Mean, SD) -->
     <div id="stats"></div>
@@ -52,7 +74,5 @@
 
     <button id="clearBtn">Clear</button>
 
-
-    <script src="script.js"></script>
 </body>
 </html>

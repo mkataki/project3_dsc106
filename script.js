@@ -34,7 +34,10 @@ d3.csv('dataclean.csv').then(function(data) {
         option.text = gender;
         genderSelect.appendChild(option);
     });
+    genderSelect.value = "All";
+    genderSelect.dispatchEvent(new Event('change'));
 
+    updateChart();
     function updateChart() {
         const ageRange = document.getElementById("ageRange").value;
         const genderInput = document.getElementById("gender").value;
@@ -70,7 +73,7 @@ d3.csv('dataclean.csv').then(function(data) {
         const svg = d3.select("#chart");
         svg.selectAll("*").remove();
     
-        const margin = { top: 100, right: 30, bottom: 60, left: 70 };
+        const margin = { top: 100, right: 20, bottom: 60, left: 80 };
         const width = svg.attr("width") - margin.left - margin.right;
         const height = svg.attr("height") - margin.top - margin.bottom;
     
@@ -84,6 +87,10 @@ d3.csv('dataclean.csv').then(function(data) {
     
         const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
     
+        const tooltip = d3.select("body").append("div")
+        .attr("id", "tooltip")
+        .style("opacity", 0);
+
         g.selectAll("rect")
             .data(bins)
             .enter()
@@ -93,7 +100,20 @@ d3.csv('dataclean.csv').then(function(data) {
             .attr("width", d => xScale(d.x1) - xScale(d.x0) - 1)
             .attr("height", d => height - yScale(d.length))
             .attr("fill", "pink")
-            .attr("opacity", 0.7);
+            .attr("opacity", 0.7)
+            .on("mouseover", function(event, d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html(`Frequency: ${d.length}<br>Range: ${d.x0.toFixed(1)} - ${d.x1.toFixed(1)}`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition()
+                    .duration(100)
+                    .style("opacity", 0);
+            });
     
         g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(xScale));
         g.append("g").call(d3.axisLeft(yScale));
@@ -104,6 +124,14 @@ d3.csv('dataclean.csv').then(function(data) {
             .attr("text-anchor", "middle")
             .style("font-size", "14px")
             .text(`Heart Rate (BPM) Distribution`);
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", - margin.left + 5)
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .style("font-size", "14px")
+            .text("Frequency");
     
         // **Plot Mean HR Line**
         const meanX = xScale(meanHR);
@@ -113,20 +141,20 @@ d3.csv('dataclean.csv').then(function(data) {
             .attr("y1", height)
             .attr("x2", meanX)
             .attr("y2", 0)
-            .attr("stroke", "blue")
-            .attr("stroke-width", 2)
-            .attr("stroke-dasharray", "5,5");
+            .attr("stroke", "black")
+            .attr("stroke-width", 2);
     
         g.append("text")
             .attr("x", meanX)
             .attr("y", -25)
             .attr("text-anchor", "middle")
             .attr("font-size", "12px")
-            .attr("fill", "blue")
+            .attr("fill", "black")
             .text(`Mean: ${meanHR.toFixed(2)}`);
     
         if (!isNaN(enteredHR)) {
             const customX = xScale(enteredHR);
+            g.selectAll(".highlight-line").remove();
             g.append("line")
                 .attr("class", "highlight-line")
                 .attr("x1", customX)
@@ -134,7 +162,7 @@ d3.csv('dataclean.csv').then(function(data) {
                 .attr("x2", customX)
                 .attr("y2", 0)
                 .attr("stroke", "deeppink")
-                .attr("stroke-width", 2);
+                .attr("stroke-width", 3);
     
             g.append("text")
                 .attr("x", customX)
@@ -286,6 +314,21 @@ d3.csv('dataclean.csv').then(function(data) {
         let zoneInfoDiv = document.getElementById("zoneInfo");
         if (zoneInfoDiv) zoneInfoDiv.innerHTML = "";
     }
+    // Get references to elements
+const hrZoneInfoBtn = document.getElementById("hrZoneInfoBtn");
+const hrZonePopup = document.getElementById("hrZonePopup");
+const closePopupBtn = document.getElementById("closePopupBtn");
+
+// Show the popup when the "HR Zone Info" button is clicked
+hrZoneInfoBtn.addEventListener("click", () => {
+    hrZonePopup.style.display = "block"; // Show the popup
+});
+
+// Hide the popup when the "X" button is clicked
+closePopupBtn.addEventListener("click", () => {
+    hrZonePopup.style.display = "none"; // Hide the popup
+});
+
     
     
     document.getElementById("HRInput").addEventListener("input", updateChart);
@@ -293,6 +336,7 @@ d3.csv('dataclean.csv').then(function(data) {
     document.getElementById("gender").addEventListener("change", updateChart);
     document.getElementById("updateZonesBtn").addEventListener("click", updateHRZones);
     document.getElementById("clearBtn").addEventListener("click", clearChart);
+    document.getElementById("hrZoneInfoBtn").addEventListener("click", showHRZoneInfo);
 
     updateChart();
 });

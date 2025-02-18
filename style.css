@@ -60,27 +60,75 @@ text[fill="orange"] {
 text[fill="red"] {
     fill: #8B0000; /* Darker red for better readability */
 }
+#tooltip {
+    position: absolute;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
 
+/* Popup box styling for Max HR */
 /* Popup box styling */
 .popup-box {
     position: fixed;
     top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    background-color: lightgrey;
-    border-radius: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: lightyellow; /* White background for a clean look */
+    border-radius: 15px; /* Rounded corners */
     padding: 20px;
-    width: 250px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    display: none; 
+    width: 400px; /* Adjust width as needed */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    display: none; /* Hidden by default */
     z-index: 1000;
 }
 
+/* Title styling */
 .popup-box h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
 }
 
+/* Text styling */
 .popup-box p {
     font-size: 16px;
+    color: #555;
+    line-height: 1.5;
 }
+
+/* Close button styling */
+#closePopupBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d; /* Red button for closing */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#closePopupBtn:hover {
+    background-color: #e60000; /* Darker red on hover */
+}
+
+/* Background overlay styling */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: none; /* Hidden by default */
+    z-index: 999; /* Below the popup box */
+}
+
+
