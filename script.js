@@ -198,17 +198,28 @@ d3.csv('dataclean.csv').then(function(data) {
             document.body.appendChild(messageDiv);
         }
     
-        // Determine user's HR zone
         let hrZoneMessage = "";
         if (!isNaN(enteredHR)) {
             if (enteredHR >= zones.fatBurnZone[0] && enteredHR < zones.fatBurnZone[1]) {
-                hrZoneMessage = `<p style="color: green;"><strong>You are in the Fat Burn Zone!</strong></p>`;
+                hrZoneMessage = `<p style="color: green; margin-bottom: 5px;"><strong>You are in the Fat Burn Zone!</strong></p>`;
             } else if (enteredHR >= zones.cardioZone[0] && enteredHR < zones.cardioZone[1]) {
-                hrZoneMessage = `<p style="color: orange;"><strong>You are in the Cardio Zone!</strong></p>`;
+                hrZoneMessage = `<p style="color: orange; margin-bottom: 5px;"><strong>You are in the Cardio Zone!</strong></p>`;
             } else if (enteredHR >= zones.peakZone[0] && enteredHR <= zones.peakZone[1]) {
-                hrZoneMessage = `<p style="color: red;"><strong>You are in the Peak Zone!</strong></p>`;
+                hrZoneMessage = `<p style="color: red; margin-bottom: 5px;"><strong>You are in the Peak Zone!</strong></p>`;
+            }
+        
+            // Ensure no duplicate lines appear by checking if there's already a message
+            const instructionText = `<p style="margin-top: 5px;"><strong>Click on the heart rate zones in the graph to see your personalized zone ranges!</strong></p>`;
+            
+            // Append instruction only if a zone message exists
+            if (hrZoneMessage) {
+                hrZoneMessage += instructionText;
             }
         }
+        
+        // Update only if a valid message is set
+        document.getElementById("hrZoneMessage").innerHTML = hrZoneMessage || "";
+        
         messageDiv.innerHTML = hrZoneMessage; // Update message
     
         // ** Update Graph with Zones **
@@ -268,24 +279,6 @@ d3.csv('dataclean.csv').then(function(data) {
         addZone(zones.fatBurnZone, "#39FF14", "#228B22", "Fat Burn Zone", 10, `${zones.fatBurnZone[0].toFixed(1)} - ${zones.fatBurnZone[1].toFixed(1)} BPM`);
         addZone(zones.cardioZone, "#FFA500", "#CC5500", "Cardio Zone", 30, `${zones.cardioZone[0].toFixed(1)} - ${zones.cardioZone[1].toFixed(1)} BPM`);
         addZone(zones.peakZone, "#FF0000", "#8B0000", "Peak Zone", 50, `${zones.peakZone[0].toFixed(1)} - ${zones.peakZone[1].toFixed(1)} BPM`);
-        
-        // ** Plot the user's HR on the graph **
-        if (!isNaN(enteredHR)) {
-            const customX = xScale(enteredHR);
-            g.append("line")
-                .attr("class", "highlight-line")
-                .attr("x1", customX)
-                .attr("y1", height)
-                .attr("x2", customX)
-                .attr("y2", 0)
-                .attr("stroke", "deeppink")
-                .attr("stroke-width", 2);
-    
-            g.append("text")
-                .attr("x", customX)
-                .attr("y", -10)
-                .attr("text-anchor", "middle")
-        }
     }
     
     
@@ -329,7 +322,6 @@ closePopupBtn.addEventListener("click", () => {
     hrZonePopup.style.display = "none"; // Hide the popup
 });
 
-    
     
     document.getElementById("HRInput").addEventListener("input", updateChart);
     document.getElementById("ageRange").addEventListener("change", updateChart);
