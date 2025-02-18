@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metric Distribution</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #chart {
+            border: 1px solid #ccc;
+        }
+        #custom-value-input, #age-input {
+            margin-top: 20px;
+        }
+        #custom-value-input input, #age-input input {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Health Metric Distribution</h2>
+
+    <!-- Metric Selection -->
+    <label for="HRInput">Enter Heart Rate (BPM):</label>
+    <input type="number" id="HRInput" step="0.1" placeholder="Enter HR" />
+
+
+    <!-- Age Range Selection -->
+    <label for="ageRange">Select Age Range:</label>
+    <select id="ageRange"></select>
+
+    <!-- Gender Selection -->
+    <label for="gender">Gender:</label>
+    <select id="gender">
+    </select>
+
+    <svg id="chart" width="600" height="400"></svg>
+
+    <!-- Display Calculated Stats (Mean, SD) -->
+    <div id="stats"></div>
+
+    <!-- Custom Value Input -->
+    <div id="custom-value-input"></div>
+
+    <!-- Age Input -->
+    <input type="number" id="ageInput" placeholder="Enter your age" />
+    <button id="updateZonesBtn">Update HR Zones</button>
+
+    <button id="clearBtn">Clear</button>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
