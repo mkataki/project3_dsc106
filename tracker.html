@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What goals are you meeting?
+    </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="global.js" defer></script>
+</head>
+<body>
+    <h1>Heart Rate Zone Tracker</h1>
+
+    <!-- Height, Weight, Age, Gender Inputs -->
+    <div id="user-inputs">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" min="150" max="203" value="170"><br>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" min="41" max="135" value="70"><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" min="10" max="63" value="30"><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender">
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+        </select><br>
+    </div>
+
+    <!-- Speed Slider -->
+    <div id="speed-container">
+        <label for="speed">Speed:</label>
+        <input type="range" id="speed" min="3" max="12" step="0.1" value="5" oninput="updateSpeedLabel()">
+        <span id="speedValue">5 km/h</span>
+    </div>
+
+    <!-- Mario Running Animation -->
+    <div id="mario-container">
+        <img id="marioGif" src="mario.gif" alt="Mario Running">
+    </div>
+
+    <!-- BPM Info -->
+    <div id="bpm-info">
+        <h2>Your Estimated Heart Rate: <span id="predictedHR">-- bpm</span></h2>
+        <h2>Heart Rate Zone: <span id="zoneDisplay">--</span></h2>
+    </div>
+
+    <!-- Heart Rate Zones with Descriptions -->
+    <div id="zones">
+        <div class="zone-container">
+            <div class="zone zone1" id="zone1">Zone 1 (50-60%)</div>
+            <p class="zone-info" id="info-zone1">
+                <strong>Zone 1 – Very Light (50-60% of MHR)</strong><br>
+                - Purpose: Recovery, warm-ups, and cool-downs<br>
+                - Benefits: Improves overall circulation, aids muscle recovery, and helps build a base for endurance.<br>
+                - Feeling: Easy effort, can carry a full conversation.
+            </p>
+        </div>
+
+        <div class="zone-container">
+            <div class="zone zone2" id="zone2">Zone 2 (60-70%)</div>
+            <p class="zone-info" id="info-zone2">
+                <strong>Zone 2 – Light (60-70% of MHR)</strong><br>
+                - Purpose: Base-building, aerobic endurance<br>
+                - Benefits: Improves fat metabolism, strengthens the heart, and enhances aerobic capacity.<br>
+                - Feeling: Comfortable, steady effort; still able to speak in full sentences.
+            </p>
+        </div>
+
+        <div class="zone-container">
+            <div class="zone zone3" id="zone3">Zone 3 (70-80%)</div>
+            <p class="zone-info" id="info-zone3">
+                <strong>Zone 3 – Moderate (70-80% of MHR)</strong><br>
+                - Purpose: Aerobic conditioning, steady-state training<br>
+                - Benefits: Increases cardiovascular efficiency and builds endurance.<br>
+                - Feeling: Breathing gets heavier, speaking in short sentences is possible.
+            </p>
+        </div>
+
+        <div class="zone-container">
+            <div class="zone zone4" id="zone4">Zone 4 (80-90%)</div>
+            <p class="zone-info" id="info-zone4">
+                <strong>Zone 4 – Hard (80-90% of MHR)</strong><br>
+                - Purpose: Lactate threshold, improving speed and performance<br>
+                - Benefits: Enhances the body's ability to sustain high-intensity efforts and delays fatigue.<br>
+                - Feeling: Heavy breathing, difficult to talk, sustainable for short durations.
+            </p>
+        </div>
+
+        <div class="zone-container">
+            <div class="zone zone5" id="zone5">Zone 5 (90-100%)</div>
+            <p class="zone-info" id="info-zone5">
+                <strong>Zone 5 – Maximum Effort (90-100% of MHR)</strong><br>
+                - Purpose: Peak performance, short bursts of maximal effort<br>
+                - Benefits: Increases power, speed, and anaerobic capacity.<br>
+                - Feeling: All-out effort, very hard to sustain, talking is nearly impossible.
+            </p>
+        </div>
+    </div>
+
+        <!-- Project Writeup -->
+        <div id="project-writeup">
+            <h2>Project Writeup</h2>
+            
+            <h3>What have you done so far?</h3>
+            <p>
+                So far, we have developed a functional heart rate zone tracker that dynamically updates based on user input. 
+                The page includes interactive elements such as a speed slider, gender selection, and age-based heart rate prediction.
+                Additionally, we have implemented an animated Mario or Peach character that runs across the screen, with animation speed 
+                adjusting smoothly to match the selected speed. We also created a structured layout where heart rate zones are visually 
+                displayed, and each zone's description is dynamically revealed when highlighted. The interface has been designed to be 
+                user-friendly, ensuring that all components are well-organized and intuitive to interact with. 
+                Also, we have ensured that the heart rate calculation logic follows a scientific approach, using age and speed to 
+                estimate maximum heart rate effectively. Overall, the project integrates both data-driven decision-making and interactive 
+                Uwe elements to make the experience engaging.
+            </p>
+    
+            <h3>What will be the most challenging part of your project to design and why?</h3>
+            <p>
+                The most challenging part of the project will be ensuring smooth, real-time interactivity between all elements while 
+                maintaining a visually appealing layout. One major difficulty is keeping the animation smooth when adjusting speed, 
+                as reapplying animations can cause the character to restart instead of continuing naturally. Another challenge is 
+                ensuring that all UI elements scale properly across different screen sizes and devices, requiring responsive 
+                design techniques. Additionally, integrating real-time data visualization for heart rate tracking could be complex, 
+                as it would require dynamically updating charts based on user input. Ensuring accurate heart rate calculations 
+                that consider multiple factors, including gender differences and intensity levels, will also be critical. Lastly, 
+                refining the user experience by adding better feedback mechanisms, such as color transitions or visual cues when 
+                heart rate zones change, will require careful design and testing. Overcoming these challenges will involve optimizing 
+                JavaScript functions, refining CSS animations, and implementing efficient event handling strategies.
+            </p>
+        </div>
+    </body>
+    </html>
+    
+
+</body>
+</html>

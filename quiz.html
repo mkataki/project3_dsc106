@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario's Heart Rate Zone Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="quiz.js" defer></script>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>Heart Rate Zone Quiz</h1>
+        <h3>Answer everything correctly to figure out your own personal goal!</h3>
+        
+        <!-- Question 1 -->
+        <div class="quiz-question">
+            <p><strong>1. Mario is training for a marathon. Which zone should he be in?</strong></p>
+            <button class="quiz-option" data-question="1" data-answer="zone3">Zone 3</button>
+            <button class="quiz-option" data-question="1" data-answer="zone4">Zone 4</button>
+            <p class="feedback" id="feedback-1"></p>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="quiz-question">
+            <p><strong>2. Mario is trying to lose weight. Which zone should he be in?</strong></p>
+            <button class="quiz-option" data-question="2" data-answer="zone2">Zone 2</button>
+            <button class="quiz-option" data-question="2" data-answer="zone5">Zone 5</button>
+            <p class="feedback" id="feedback-2"></p>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="quiz-question">
+            <p><strong>3. Mario is trying to beat his friend in a race. Which zone should he be in?</strong></p>
+            <button class="quiz-option" data-question="3" data-answer="zone1">Zone 1</button>
+            <button class="quiz-option" data-question="3" data-answer="zone4">Zone 4</button>
+            <p class="feedback" id="feedback-3"></p>
+        </div>
+
+        <p id="quiz-feedback"></p>
+        <button id="continue-button" class="hidden">Continue to Tracker</button>
+    </div>
+</body>
+</html>

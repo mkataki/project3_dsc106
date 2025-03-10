@@ -3,77 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Metric Distribution</title>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="script.js"></script>
+    <title>Mario's Race - Intro</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #chart {
-            border: 1px solid #ccc;
-        }
-        #custom-value-input, #age-input {
-            margin-top: 20px;
-        }
-        #custom-value-input input, #age-input input {
-            margin: 0 10px;
-        }
-    </style>
+    <script src="global.js" defer></script>
 </head>
 <body>
-    <h2>The Science of Running: Is Your Heart Rate in the Zone?</h2>
-    <h4>After a run, input information like your heart rate as well as your age and see what your heart rate says about your workout!</h4>
-
-    <!-- Metric Selection -->
-    <label for="HRInput">Enter Heart Rate (BPM):</label>
-    <input type="number" id="HRInput" step="0.1" placeholder="Enter HR" />
-
-
-    <!-- Age Range Selection -->
-    <label for="ageRange">Select Age Range:</label>
-    <select id="ageRange"></select>
-
-    <!-- Gender Selection -->
-    <label for="gender">Gender:</label>
-    <select id="gender">
-    </select>
-
-    <!-- HR Zone Info Button -->
-    <button id="hrZoneInfoBtn">HR Zone Info</button>
-    
-
-    <!-- Popup Box -->
-    <div id="hrZonePopup" class="popup-box">
-        <button id="closePopupBtn" style="float: right;">X</button>
-        <h3>Heart Rate Zones</h3>
-        <p><strong>Fat Burn Zone:</strong> 50% - 70% of your max Heart Rate. Ideal for weight loss and endurance.</p>
-        <p><strong>Cardio Zone:</strong> 70% - 85% of your max Heart Rate. Improves cardiovascular fitness.</p>
-        <p><strong>Peak Zone:</strong> 85% - 100% of your max Heart Rate. Best for high-intensity training.</p>
-        <h4>How is Max Heart Rate Calculated?</h4>
-        <p>The maximum heart rate (Max HR) is estimated using the formula:</p>
-        <p><strong>Max HR = 220 - Age</strong></p>
+    <div id="intro-screen">
+        <img id="intro-mario" src="mario.gif" alt="Mario Running">
+        <h2>Help Mario figure out his fitness goals!</h2>
+        <button id="start-button">Start</button>
     </div>
-
-
-    <svg id="chart" width="600" height="400"></svg>
-    <div id="tooltip" style="opacity: 0; position: absolute;"></div>
-
-    <select id="metric" style="display: none;"></select>
-
-    <!-- Display Calculated Stats (Mean, SD) -->
-    <div id="stats"></div>
-
-    <!-- Custom Value Input -->
-    <div id="custom-value-input"></div>
-
-    <!-- Age Input -->
-    <input type="number" id="ageInput" placeholder="Enter your age" />
-    <button id="updateZonesBtn">Update HR Zones</button>
-
-    <button id="clearBtn">Clear</button>
-
 </body>
 </html>
